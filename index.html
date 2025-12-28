@@ -767,6 +767,8 @@
   
 }
 /* EXPERIENCE SECTION */
+/* --- EXPERIENCE MOBILE FIX --- */
+
 .exp-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -843,6 +845,19 @@
 .exp-details[open] .readmore {
   color: #cfd7ff;
   text-decoration: underline;
+}
+/* FINAL EXPERIENCE MOBILE FIX */
+@media (max-width: 900px) {
+  .exp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* make the 3rd card behave like others on mobile */
+  .exp-grid > .center {
+    grid-column: auto;
+    max-width: 100%;
+    margin: 0;
+  }
 }
         </style>
           </head>
