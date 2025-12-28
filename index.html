@@ -83,15 +83,17 @@
 
 /* --- NAV RESPONSIVE --- */
 
-/* Hide hamburger on desktop */
+/* === FINAL NAV MOBILE BEHAVIOR === */
+
+/* hide hamburger on desktop */
 .menu-toggle {
   display: none;
 }
 
-/* Mobile navigation */
+/* mobile breakpoint */
 @media (max-width: 900px) {
 
-  /* Show hamburger button on mobile */
+  /* show hamburger */
   .menu-toggle {
     display: block;
     background: none;
@@ -100,29 +102,32 @@
     color: white;
     cursor: pointer;
     margin-left: auto;
+    z-index: 2001;
   }
 
-  /* Brand + hamburger in one row */
+  /* keep brand + hamburger aligned */
   .nav-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  /* Hide nav links by default on mobile */
+  /* override desktop nav — HIDE by default on mobile */
   .nav-links {
-    display: none;
+    display: none !important;
     flex-direction: column;
     width: 100%;
     background: rgba(11, 16, 32, 0.92);
-    padding: 18px 18px;
+    padding: 18px;
     margin-top: 12px;
     border-radius: 14px;
+    position: relative;
+    z-index: 2000;
   }
 
-  /* Show when .show class is added via JS */
+  /* show when toggled */
   .nav-links.show {
-    display: flex;
+    display: flex !important;
   }
 
   .nav-links a {
@@ -131,7 +136,6 @@
     font-weight: 600;
   }
 }
-
             .brand span {
               font-size: 24px;
             }
@@ -1551,23 +1555,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-  <script>
-  const btn = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.nav-links');
+        <script>
+          const btn = document.querySelector('.menu-toggle');
+          const nav = document.querySelector('.nav-links');
 
-  btn.addEventListener('click', () => {
-    nav.classList.toggle('show');
-  });
-  // Close menu when a nav link is clicked on mobile
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 900) {
-        nav.classList.remove('show');
-      }
-    });
-  });
-</script>
-          </body>
+          btn.addEventListener('click', () => nav.classList.toggle('show'));
+
+          // Close menu after clicking a link on mobile
+          document.querySelectorAll('.nav-links a').forEach(link =>
+            link.addEventListener('click', () => {
+              if (window.innerWidth <= 900) nav.classList.remove('show');
+            })
+          );
+        </script>
+    </body>
           <script>
   // remove hash on page reload to prevent auto scroll
             if (window.location.hash) {
